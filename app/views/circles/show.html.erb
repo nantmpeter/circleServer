@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @circle.title %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @circle.desc %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @circle.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_circle_path(@circle) %> |
+<%= link_to 'Back', circles_path %>

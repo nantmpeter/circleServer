@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @feed.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @feed.url %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @feed.user_id %>
+</p>
+
+<p>
+  <strong>Circle:</strong>
+  <%= @feed.circle_id %>
+</p>
+
+<%  @result.each do |item| %>
+    <p><h1><%=  link_to(item.title,item.url) %></h1></p>
+    <p><%=  sanitize item.content %></p>
+<%  end %>
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>
