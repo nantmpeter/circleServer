@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  @@salt = 'circleServer'
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -24,13 +26,22 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    @invite = Invite.where(:code=>params[:user][:code])
     @user = User.new(user_params)
-
     respond_to do |format|
-      if @user.save
+      if !@invite.empty? && @user.save
+        @invite = @invite.take
+        circle_user = CircleUser.new(:circle_id=>@invite.circle_id,:user_id=>@user.id,:invite_user_id=>@invite.user_id)
+        if circle_user.save
+          num = @invite.num+1
+          @invite.num = num
+          @invite.code = Digest::MD5.hexdigest(@invite.user_id.to_s+@invite.circle_id.to_s+num.to_s+@@salt)
+          @invite.save
+        end
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
+        @user.errors[:base] << "邀请码错误！"
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -69,6 +80,15 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+      # check_code
       params.require(:user).permit(:name, :password, :password_confirmation)
     end
+
+    # def check_code
+    #   code = params[:user][:code]
+    #   @invite = Invite.where(:code=>code).take
+    #   unless @invite
+    #     raise '邀请码错误'
+    #   end
+    # end
 end

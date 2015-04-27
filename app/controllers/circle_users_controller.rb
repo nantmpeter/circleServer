@@ -13,7 +13,7 @@ class CircleUsersController < ApplicationController
   def show
     r = Invite.where(:user_id=>@circle_user.user_id)
     if r.length == 0
-      @invite = Invite.new(:code=>Digest::MD5.hexdigest(@circle_user.id.to_s+@circle_user.circle_id.to_s+@@salt),
+      @invite = Invite.new(:code=>Digest::MD5.hexdigest(@circle_user.user_id.to_s+@circle_user.circle_id.to_s+@@salt),
                  :user_id=>@circle_user.user_id,
                  :num=>0,
                  :circle_id=>@circle_user.circle_id)
