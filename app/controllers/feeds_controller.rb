@@ -11,7 +11,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     @feed.updateArticle
-    @result = Article.where(:genre=>2,:user_id=>@feed.id)
+    @result = Article.where(:genre=>2,:user_id=>@feed.id).order("id desc").limit(10)
   end
 
   # GET /feeds/new

@@ -21,7 +21,7 @@
       <tr>
         <td><%= article.sign %></td>
         <td><%= article.title %></td>
-        <td><%= article.content %></td>
+        <!--<td><%= sanitize article.content %></td>-->
         <td><%= article.genre %></td>
         <td><%= article.user_id %></td>
         <td><%= article.url %></td>
@@ -33,6 +33,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @posts %>
 
 <br>
 

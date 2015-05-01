@@ -43,5 +43,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'bcrypt'
+
+  gem 'will_paginate'
 end
 

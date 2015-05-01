@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'home/index'
+
   get 'sessions/new'
 
   get 'sessions/create'
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
 
   get 'new/destroy'
 
+  get '/' => "home#index"
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
