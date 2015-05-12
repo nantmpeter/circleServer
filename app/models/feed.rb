@@ -5,7 +5,7 @@ class Feed < ActiveRecord::Base
     url = self.url
     interval = Time.now - self.updated_at
     if self.updated_at == self.created_at or interval > 7200
-    result = RSS::Parser.parse(open(url).read)
+    result = RSS::Parser.parse(open(url).read,false)
       if result
         result.items.each do |item|
           sign = Digest::MD5.hexdigest(self.id.to_s+item.title)

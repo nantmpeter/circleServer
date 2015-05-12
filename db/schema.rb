@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426140952) do
+ActiveRecord::Schema.define(version: 20150512150815) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "sign"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20150426140952) do
     t.integer  "user_id"
     t.text     "url"
     t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "circle_feeds", force: :cascade do |t|
+    t.integer  "circle_id"
+    t.integer  "feed_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

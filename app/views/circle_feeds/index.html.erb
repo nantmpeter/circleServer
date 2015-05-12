@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Circle Feeds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Circle</th>
+      <th>Feed</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @circle_feeds.each do |circle_feed| %>
+      <tr>
+        <td><%= circle_feed.circle_id %></td>
+        <td><%= circle_feed.feed_id %></td>
+        <td><%= circle_feed.user_id %></td>
+        <td><%= link_to 'Show', circle_feed %></td>
+        <td><%= link_to 'Edit', edit_circle_feed_path(circle_feed) %></td>
+        <td><%= link_to 'Destroy', circle_feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Circle feed', new_circle_feed_path %>

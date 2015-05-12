@@ -1,0 +1,29 @@
+<%= form_for(@circle_feed) do |f| %>
+  <% if @circle_feed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@circle_feed.errors.count, "error") %> prohibited this circle_feed from being saved:</h2>
+
+      <ul>
+      <% @circle_feed.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :circle_id %><br>
+    <%= f.number_field :circle_id %>
+  </div>
+  <div class="field">
+    <%= f.label :feed_id %><br>
+    <%= f.number_field :feed_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

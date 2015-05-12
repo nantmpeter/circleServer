@@ -29,12 +29,19 @@ class FeedsController < ApplicationController
     @feed = Feed.new(feed_params)
 
     respond_to do |format|
-      if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
-        format.json { render :show, status: :created, location: @feed }
-      else
-        format.html { render :new }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
+      Feed.transaction do
+        CircleFeed.transaction do
+          if @feed.save!
+            # 添加feed和circle的关系
+              CircleFeed.new(:circle_id => session[:circle], :feed_id => @feed.id, :user_id => session[:user]).save!
+
+            format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
+            format.json { render :show, status: :created, location: @feed }
+          else
+            format.html { render :new }
+            format.json { render json: @feed.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end
