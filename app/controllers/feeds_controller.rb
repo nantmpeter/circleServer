@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.all
+    @feeds = Feed.paginate(page:params[:page],per_page:10)
   end
 
   # GET /feeds/1

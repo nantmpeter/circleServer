@@ -1,39 +1,30 @@
-<p id="notice"><%= notice %></p>
+<style type="text/css">
+  .article{ background-color: white;}
+  .head { 
+    height: 200px;
+    padding-top: 70px; 
+    margin: 0 -18px 0 -18px;
+    background-color: #0e90d2;
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+  }
+  body { background-color: #f6f6f6; }
+</style>
+<div class="am-g">
 
-<p>
-  <strong>Sign:</strong>
-  <%= @article.sign %>
-</p>
+  <div class="am-u-sm-12 am-u-md-8 am-u-lg-6 am-u-sm-centered article">
+    <article class="am-article">
+      <div class="am-article-hd head">
+        <h1 class="am-article-title"><%= @article.title %></h1>
+        <!-- <p class="am-article-meta">meta</p> -->
+      </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+      <div class="am-article-bd am-monospace">
+        <!-- <p class="am-article-lead">lead</p> -->
+        <%= sanitize @article.content %>
+      </div>
+    </article>
+  </div>
+</div>
 
-<p>
-  <strong>Content:</strong>
-  <%= sanitize @article.content %>
-</p>
-
-<p>
-  <strong>Genre:</strong>
-  <%= @article.genre %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @article.user_id %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @article.url %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @article.status %>
-</p>
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>

@@ -10,6 +10,21 @@ class CirclesController < ApplicationController
   # GET /circles/1
   # GET /circles/1.json
   def show
+    feed = CircleFeed.where(:circle_id =>@circle.id).pluck("feed_id")
+    user = CircleUser.where(:circle_id =>@circle.id).pluck("user_id")
+    @feed = {}
+    @user = {}
+    Feed.where(:id=>feed).each {
+      |x| @feed[x.id] = x.name
+    }
+    User.where(:id=>user).each {
+      |y| @user[y.id] = y.name
+    }
+    p @feed
+    # p session[:circle]
+    @feeds = Feed.where(:id=>feed)
+    @articles = Article.where(["user_id in (?) and genre=2 or (id in (?) and genre=1)",feed,user]).paginate(page:params[:page],per_page:10)
+
   end
 
   # GET /circles/new

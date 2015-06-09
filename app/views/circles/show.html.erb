@@ -1,19 +1,78 @@
-<p id="notice"><%= notice %></p>
+<style type="text/css">
+	.am-list-item-text {
+		max-height: none !important;
+		-webkit-line-clamp:none !important;
+	}
+</style>
+<div class="am-g am-g-2">
+  <div class="am-u-lg-8">
+  	<div data-am-widget="list_news" class="am-list-news am-list-news-default">
+	  <!--列表标题-->
+	  <div class="am-list-news-bd">
+	    <ul class="am-list">
+        <% @articles.each do |article| %>
+    	<!--缩略图在标题下方居左-->
+	      <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
+	        <h3 class="am-list-item-hd">
+	        <a href="/articles/<%= article.id %>"><%= article.title %></a>
+	        <% if article.genre == 1
+	        	name = @user[article.user_id]
+	        	type = "users"
+	        else
+	        	name = @feed[article.user_id]
+	        	type = "feeds"
+	        end %>
+	        <a href="/<%= type %>/<%= article.id %>" class="am-fr am-list-date"><%= name %></a>
+	        </h3>
+	        <!-- <div class="am-u-sm-4 am-list-thumb">
+	          <a href="http://www.douban.com/online/11614662/" class="">
+	            <img src="http://img5.douban.com/lpic/o636459.jpg" alt="我很囧，你保重....晒晒旅行中的那些囧！"
+	            />
+	          </a>
+	        </div> -->
+	        <div class=" am-u-sm-12  am-list-main">
+	          <div class="am-list-item-text"><%= sanitize strip_links(article.content) %></div>
+	        </div>
+	        <a class='item-close' style="display:none">收起</a>
+	      </li>
+    	<% end %>
+	    </ul>
+		<%= will_paginate @articles %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @circle.title %>
-</p>
+	  </div>
+	</div>
+    <!-- <ul class="am-list am-list-static">
+        <% @articles.each do |article| %>
+      <li><a href="/articles/<%= article.id %>"><%= article.title %></a></li>
+    <% end %>
+    </ul> -->
+  </div>
+  <div class="am-u-lg-4">
+      <div class="am-u-lg-8">
+    <ul class="am-list am-list-static">
+        <% @feeds.each do |feed| %>
+      <li><a href="/feeds/<%= feed.id %>"><%= feed.name %></a></li>
+    <% end %>
+    </ul>
+  </div>
+  </div>
+</div>
+<div>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @circle.desc %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @circle.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_circle_path(@circle) %> |
-<%= link_to 'Back', circles_path %>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".am-list-main").click(function(){
+			$(this).css("-webkit-line-clamp","inherit");
+			$(this).find(".am-list-item-text").css("-webkit-line-clamp","inherit");
+			$(this).parent().find(".item-close").show();
+		});
+		// $(".item-close").click()
+		$(document).on("click",".item-close",function(){
+			console.log($(this).parent().find(".am-list-main"));
+			$(this).parent().find(".am-list-main").css("-webkit-line-clamp","2");
+			$(this).hide();
+			return false;
+		});
+	})
+</script>

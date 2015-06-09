@@ -21,8 +21,8 @@
 </p>
 
 <%  @result.each do |item| %>
-    <p><h1><%=  link_to(item.title,item.url) %></h1></p>
-    <p><%=  sanitize item.content %></p>
+    <p><%=  link_to(item.title,item.url) %></p>
+
 <%  end %>
 
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
