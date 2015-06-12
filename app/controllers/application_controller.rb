@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :authorize,:except => :create
   def authorize
+  	p 2222222222222
+  	p session[:user]
     unless session[:user]
       redirect_to "/login"
+    else
+    	@circle = Circle.find(session[:circle])    	
     end
-    @circle = Circle.find(session[:circle])
   end
 
   # Prevent CSRF attacks by raising an exception.

@@ -1,8 +1,27 @@
-<h1>Sessions#new</h1>
-<form method="post">
-  <div>name: <input name="name" type="text">	</div>
-  <div>pass: <input name="pwd" type="password"></div>
-  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-  <button>登录</button>
-</form>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class="am-g">
+
+  <div class="am-u-sm-12 am-u-md-8 am-u-lg-6 am-u-sm-centered">
+    <form class="am-form am-form-horizontal" method="post">
+
+	  <div class="am-form-group am-form-icon am-form-feedback am-margin-vertical">
+	    <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label">用户名</label>
+	    <div class="am-u-sm-10">
+	      <input type="text" name="name" id="doc-ipt-3-a" class="am-form-field" placeholder="输入你的用户名">
+	    </div>
+	  </div>
+	    <div class="am-form-group am-form-icon am-form-feedback">
+	    <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label">密码</label>
+	    <div class="am-u-sm-10">
+	      <input type="password" name="pwd" id="doc-ipt-3-a" class="am-form-field" placeholder="输入你的密码">
+	    </div>
+	  </div>
+	  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+
+	    <div class="am-form-group">
+	    <div class="am-u-sm-10 am-u-sm-offset-2">
+	      <button type="submit" class="am-btn am-btn-default">登入</button>
+	    </div>
+	  </div>
+	</form>
+  </div>
+</div>

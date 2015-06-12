@@ -23,7 +23,7 @@ class CirclesController < ApplicationController
     p @feed
     # p session[:circle]
     @feeds = Feed.where(:id=>feed)
-    @articles = Article.where(["user_id in (?) and genre=2 or (id in (?) and genre=1)",feed,user]).paginate(page:params[:page],per_page:10)
+    @articles = Article.where(["user_id in (?) and genre=2 or (id in (?) and genre=1)",feed,user]).order("id desc").paginate(page:params[:page],per_page:10)
 
   end
 
